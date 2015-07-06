@@ -1,7 +1,7 @@
 <?php
 
 function generate_editer($tablename,$tabledata){
-echo "<li>[$tablename] Generando backend de editar</li>";
+echo "<li>[$tablename] Generando backend de actualizar</li>";
 $form="<?php\n";
 $form .= "\ninclude \"app/core/conection.php\";\n\n";
 $requireds = array();
@@ -18,7 +18,7 @@ if(count($requireds)>0){
 	$form.="){\n";
 }
 
-$sql = "INSERT INTO $tablename SET ";
+$sql = "UPDATE $tablename SET ";
 $fields = array();
 foreach ($tabledata["fields"] as $fieldname =>$fielddata) {
 	if($fielddata["type"]!="ai_pk" && $fielddata["type"]!="submit" && $fielddata["type"]!="now"){
@@ -28,10 +28,11 @@ foreach ($tabledata["fields"] as $fieldname =>$fielddata) {
 			$fields[] = $fieldname."="."\\\"\$_".$method."[".$fieldname."]\\\"";
 		}
 	}else if($fielddata["type"]=="now"){
-		$fields[] = $fieldname."="."NOW()";		
+		//$fields[] = $fieldname."="."NOW()";		
 	}
 }
 $sql.= implode(",", $fields);
+$sql .= " WHERE id = \$_POST[id]";
 $form .= "\$sql=\"".$sql."\";\n";
 
 $form .= "\$query=\$con->query(\$sql);\n";
@@ -43,7 +44,7 @@ if(count($requireds)>0){
 
 $form .="?>";
 
-$f=fopen ("app/views/".$tablename."-add.php","w");
+$f=fopen ("app/views/".$tablename."-update.php","w");
 fwrite($f, $form);
 fclose($f);
 

@@ -5,7 +5,7 @@ include "app/core/conection.php";
 $sql="SELECT * FROM client";
 $query=$con->query($sql);
 if($query && $query->num_rows>0){
-echo "<table>";
+echo "<table border='1'>";
 echo "<thead>";
 echo "<th>id</th>";
 echo "<th>name</th>";
@@ -25,7 +25,7 @@ echo "<td>$r->address</td>";
 echo "<td>$r->phone</td>";
 echo "<td>$r->email</td>";
 echo "<td>$r->created_at</td>";
-echo "<td><a href=\"index.php?view=client-del&id=$r->id\">Eliminar</a></td>";
+echo "<td> <a href=\"index.php?view=client-edit&id=$r->id\">Editar</a> <a href=\"index.php?view=client-del&id=$r->id\">Eliminar</a></td>";
 echo "</tr>";
 }
 echo "</table>";

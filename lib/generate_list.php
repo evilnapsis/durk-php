@@ -19,7 +19,7 @@ $form .= "\$sql=\"".$sql."\";\n";
 
 $form .= "\$query=\$con->query(\$sql);\n";
 $form .= "if(\$query && \$query->num_rows>0){\n";
-$form .= "echo \"<table>\";\n";
+$form .= "echo \"<table border='1'>\";\n";
 $form .="echo \"<thead>\";\n";
 foreach ($fields as $field) {
 $form .= "echo \"<th>$field</th>\";\n";
@@ -31,7 +31,7 @@ $form .="echo \"<tr>\";\n";
 foreach ($fields as $field) {
 $form .= "echo \"<td>\$r->$field</td>\";\n";
 }
-$form .= "echo \"<td><a href=\\\"index.php?view=$tablename-del&id=\$r->id\\\">Eliminar</a></td>\";\n";
+$form .= "echo \"<td> <a href=\\\"index.php?view=$tablename-edit&id=\$r->id\\\">Editar</a> <a href=\\\"index.php?view=$tablename-del&id=\$r->id\\\">Eliminar</a></td>\";\n";
 $form .="echo \"</tr>\";\n";
 $form .= "}\n";
 $form .= "echo \"</table>\";\n";
